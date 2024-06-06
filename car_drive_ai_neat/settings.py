@@ -32,7 +32,7 @@ population_settings = {
     # The number of generations to go without improvement before removing all but the 2 best performing Species
     'max_staleness': None,  # Default = 20
     # Folder to save each generation to (overwritten each time) so the program can be paused and resumed
-    'save_folder': None,
+    'save_folder': 'latest',
 
 }
 
@@ -124,6 +124,6 @@ settings = {
 # Any constants/variables needed for simulating the Players should be here for easy adjustments
 simulation_settings = {
 
-    'track_name': '1',
+    'track_name': '18x10',
 
 }
