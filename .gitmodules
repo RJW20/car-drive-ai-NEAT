@@ -1,0 +1,6 @@
+[submodule "submodules/car-drive-app"]
+	path = submodules/car-drive-app
+	url = https://github.com/RJW20/car-drive-app.git
+[submodule "submodules/NEAT"]
+	path = submodules/NEAT
+	url = https://github.com/RJW20/NEAT.git

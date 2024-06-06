@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "car-drive-ai-neat"
+version = "0.1.0"
+description = "An application of my implementation of NEAT (https://github.com/RJW20/NEAT) to a simple car driving around a track."
+authors = ["RJW20"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+neat = { path = "submodules/NEAT/", develop = false }
+car_drive_app = { path = "submodules/car-drive-app/", develop = true }
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
