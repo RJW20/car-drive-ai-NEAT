@@ -17,12 +17,13 @@ class Player(BaseCar, BasePlayer):
     def look_in_direction(self, direction: Vector, origin: Vector, track: BaseTrack) -> float:
         """Return the normalised distance to the edge of the Track from the point origin on the Car.
         
-        Normalisation is 3*self.LENGTH (and if no track is found in 3*self.LENGTH steps reutrns 1)
+        Normalisation is 3*self.LENGTH (and if no track is found in 3*self.LENGTH steps returns 1)
         """
 
         for i in range(3 * self.LENGTH, -1, -1):
             if not track.check_in_bounds([origin + i * direction]):
-                return i / 3 * self.LENGTH
+                return i / (3 * self.LENGTH)
+        return 1
             
     @cached_property
     def MAX_SPEED(self) -> float:
@@ -69,6 +70,8 @@ class Player(BaseCar, BasePlayer):
         self.vision.append(self.velocity.magnitude / self.MAX_SPEED)
         self.vision.append(self.drift_angle / math.pi)
         self.vision.append(2 * self.fl_wheel.turn_angle / math.pi)   # Max turn angle < 90 degrees
+
+        print(self.vision, flush=True)
 
     def think(self) -> tuple[Turn, Acceleration]:
         """Feed the input into the Genome and return the output as a valid move."""
