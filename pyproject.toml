@@ -11,6 +11,8 @@ python = "^3.12"
 neat = { path = "submodules/NEAT/", develop = false }
 car_drive_app = { path = "submodules/car-drive-app/", develop = true }
 
+[tool.poetry.scripts]
+main = "car_drive_ai_neat.main:main"
 
 [build-system]
 requires = ["poetry-core"]
