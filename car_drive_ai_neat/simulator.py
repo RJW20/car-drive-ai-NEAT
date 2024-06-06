@@ -19,11 +19,13 @@ def simulate(player: Player) -> Player:
     time = 0
     gates_passed = 0
     current_gate_index = track.current_gate_index
-    while track.check_in_bounds(player) and gates_passed < track.total_gates + 2:
+    while track.check_in_bounds(player.outline) and gates_passed < track.total_gates + 2:
 
         player.look(track)
         player.move(*player.think())
         track.update_gate(player)
+
+        time += 1
 
         if player.velocity == Vector(0,0):
             break
@@ -32,8 +34,6 @@ def simulate(player: Player) -> Player:
             gates_passed += 1
         elif track.current_gate_index == (current_gate_index - 1) % track.total_gates:
             gates_passed -= 1
-
-        time += 1
 
     player.fitness = (gates_passed ** 2) / time
     return player
