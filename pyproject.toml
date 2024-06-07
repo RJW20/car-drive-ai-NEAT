@@ -13,6 +13,7 @@ car_drive_app = { path = "submodules/car-drive-app/", develop = true }
 
 [tool.poetry.scripts]
 main = "car_drive_ai_neat.main:main"
+playback = "car_drive_ai_neat.playback:playback"
 
 [build-system]
 requires = ["poetry-core"]

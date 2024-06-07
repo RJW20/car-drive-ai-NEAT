@@ -27,7 +27,7 @@ def simulate(player: Player) -> Player:
 
         time += 1
 
-        if player.velocity == Vector(0,0):
+        if player.velocity == Vector(0,0) and time > 1:
             break
 
         if track.current_gate_index == (current_gate_index + 1) % track.total_gates:
@@ -35,5 +35,5 @@ def simulate(player: Player) -> Player:
         elif track.current_gate_index == (current_gate_index - 1) % track.total_gates:
             gates_passed -= 1
 
-    player.fitness = (gates_passed ** 2) / time
+    player.fitness = gates_passed * abs(gates_passed) / time
     return player
