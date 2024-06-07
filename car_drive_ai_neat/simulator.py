@@ -34,6 +34,7 @@ def simulate(player: Player) -> Player:
             gates_passed += 1
         elif track.current_gate_index == (current_gate_index - 1) % track.total_gates:
             gates_passed -= 1
+        current_gate_index = track.current_gate_index
 
     player.fitness = gates_passed * abs(gates_passed) / time
     return player

@@ -107,7 +107,10 @@ class Playback:
         # Draw the Track
         self.track.draw(self.screen)
 
-        for car in self.players:
+        for i, car in enumerate(self.players):
+
+            if i in self.dead_car_indices:
+                continue
 
             # Draw the Car
             for point in car.outline:
