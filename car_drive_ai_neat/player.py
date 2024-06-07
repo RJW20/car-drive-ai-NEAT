@@ -20,7 +20,7 @@ class Player(BaseCar, BasePlayer):
         Normalisation is 3*self.LENGTH (and if no track is found in 3*self.LENGTH steps returns 1)
         """
 
-        for i in range(1, 3 * self.LENGTH):
+        for i in range(1, 3 * self.LENGTH, 4):
             if not track.check_in_bounds([origin + i * direction]):
                 return i / (3 * self.LENGTH)
         return 1
@@ -43,7 +43,7 @@ class Player(BaseCar, BasePlayer):
         """
 
         # Get positions on the Car to look from
-        half_length = Vector.unit_from_angle(self.angle) * self.LENGTH / 2
+        half_length = self.direction * self.LENGTH / 2
         half_width = Vector.unit_from_angle(self.angle + math.pi/2) * self.WIDTH / 2
         front = self.position + half_length
         front_left = front - half_width
