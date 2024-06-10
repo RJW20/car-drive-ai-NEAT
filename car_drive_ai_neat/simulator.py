@@ -1,7 +1,6 @@
 from car_drive_ai_neat.player import Player
 from car_drive_ai_neat.settings import simulation_settings
 from car_drive_app.track.base_track import BaseTrack
-from car_drive_app.cartesians import Vector
 
 
 def simulate(player: Player) -> Player:
@@ -27,7 +26,7 @@ def simulate(player: Player) -> Player:
 
         time += 1
 
-        if player.velocity == Vector(0,0) and time > 1:
+        if player.velocity.magnitude < 0.2 and time > 10:
             break
 
         if track.current_gate_index == (current_gate_index + 1) % track.total_gates:
@@ -36,5 +35,6 @@ def simulate(player: Player) -> Player:
             gates_passed -= 1
         current_gate_index = track.current_gate_index
 
-    player.fitness = gates_passed * abs(gates_passed) / time
+    #player.fitness = gates_passed * abs(gates_passed) / time
+    player.fitness = gates_passed
     return player
