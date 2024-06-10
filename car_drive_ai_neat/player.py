@@ -87,10 +87,10 @@ class Player(BaseCar, BasePlayer):
 
         match(choice % 3):
             case 0:
-                acceleration = Acceleration.FORWARD
-            case 1:
-                acceleration = Acceleration.REVERSE
-            case 2:
                 acceleration = Acceleration.NONE
+            case 1:
+                acceleration = Acceleration.FORWARD
+            case 2:
+                acceleration = Acceleration.REVERSE
 
         return turn, acceleration
