@@ -17,13 +17,27 @@ class Player(BaseCar, BasePlayer):
     def look_in_direction(self, direction: Vector, origin: Vector, track: BaseTrack) -> float:
         """Return the normalised distance to the edge of the Track from the point origin on the Car.
         
-        Normalisation is 3*self.LENGTH (and if no track is found in 3*self.LENGTH steps returns 1)
+        Finds the distance using binary search.
+        Normalisation is 3*self.LENGTH (and if no track is found in 3*self.LENGTH/4 steps returns 1).
         """
 
-        for i in range(1, 3 * self.LENGTH, 4):
-            if not track.check_in_bounds([origin + i * direction]):
-                return i / (3 * self.LENGTH)
-        return 1
+        # First check max distance
+        if track.check_in_bounds([origin + 3 * self.LENGTH * direction]):
+            return 1
+        
+        # Otherwise we know there is a first point thats not in bounds
+        l = 0
+        r = (3 * self.LENGTH - 1) // 4  # step size of 4
+        step = 4 * direction
+
+        while l < r:
+            m = math.floor((l + r ) / 2)
+            if track.check_in_bounds([origin + m * step]):
+                l = m + 1
+            else:
+                r = m
+
+        return l * 4 / (3 * self.LENGTH)
             
     @cached_property
     def MAX_SPEED(self) -> float:
