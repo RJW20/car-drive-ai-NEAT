@@ -5,7 +5,7 @@ from neat import BasePlayer
 from car_drive_app.car.base_car import BaseCar
 from car_drive_app.cartesians import Vector
 from car_drive_app.track.base_track import BaseTrack
-from car_drive_app.car import Turn, Acceleration
+from car_drive_app.car import Acceleration
 
 
 class Player(BaseCar, BasePlayer):
@@ -83,23 +83,15 @@ class Player(BaseCar, BasePlayer):
         # Include some of the Car's attributes
         self.vision.append(self.velocity.magnitude / self.MAX_SPEED)
         self.vision.append(self.drift_angle / math.pi)
-        self.vision.append(2 * self.fl_wheel.turn_angle / math.pi)   # Max turn angle < 90 degrees
+        self.vision.append(4 * self.fl_wheel.turn_angle / math.pi)   # Max turn angle is pi/4
 
-    def think(self) -> tuple[Turn, Acceleration]:
+    def think(self) -> tuple[float, Acceleration]:
         """Feed the input into the Genome and return the output as a valid move."""
 
         choices = self.genome.propagate(self.vision)
-        choice = max(enumerate(choices), key = lambda choice: choice[1])[0]
+        acceleration_choice = max(enumerate(choices[0:3]), key=lambda choice: choice[1])[0]
 
-        match(choice // 3):
-            case 0:
-                turn = Turn.STRAIGHT
-            case 1:
-                turn = Turn.LEFT
-            case 2:
-                turn = Turn.RIGHT
-
-        match(choice % 3):
+        match acceleration_choice:
             case 0:
                 acceleration = Acceleration.NONE
             case 1:
@@ -107,4 +99,6 @@ class Player(BaseCar, BasePlayer):
             case 2:
                 acceleration = Acceleration.REVERSE
 
-        return turn, acceleration
+        turn_angle = (choices[4] - 0.5) * math.pi / 2
+
+        return turn_angle, acceleration
