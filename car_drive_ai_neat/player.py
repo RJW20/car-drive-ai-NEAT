@@ -99,6 +99,6 @@ class Player(BaseCar, BasePlayer):
             case 2:
                 acceleration = Acceleration.REVERSE
 
-        turn_angle = (choices[4] - 0.5) * math.pi / 2
+        turn_angle = (choices[3] - 0.5) * math.pi / 2
 
         return turn_angle, acceleration
