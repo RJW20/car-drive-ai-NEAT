@@ -1,3 +1,5 @@
+import math
+
 from car_drive_ai_neat.player import Player
 from car_drive_ai_neat.settings import simulation_settings
 from car_drive_app.track.base_track import BaseTrack
@@ -18,6 +20,7 @@ def simulate(player: Player) -> Player:
     time = 0
     gates_passed = 0
     current_gate_index = track.current_gate_index
+    start_angle = track.car_start_direction
     while track.check_in_bounds(player.outline) and gates_passed < track.total_gates + 2:
 
         player.look(track)
@@ -36,5 +39,5 @@ def simulate(player: Player) -> Player:
         current_gate_index = track.current_gate_index
 
     #player.fitness = gates_passed * abs(gates_passed) / time
-    player.fitness = gates_passed
+    player.fitness = gates_passed if not math.isclose(player.angle, start_angle, abs_tol=10e-7) else 0.5    # Forces some turning
     return player
