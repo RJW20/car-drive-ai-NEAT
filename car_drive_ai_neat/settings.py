@@ -62,7 +62,7 @@ reproduction_settings = {
     # The rate at which a Genome that is having its weights mutated will replace a weight over perturbing it
     'weight_replacement_rate': None,    # Default = 0.1
     # The rate at which a new Connection will be added to a Genome
-    'connection_rate': None,    # Default = 0.1
+    'connection_rate': 0.2,    # Default = 0.1
     # The rate at which a new Node will be added to a Genome
     'node_rate': None,  # Default = 0.03
 
@@ -102,7 +102,7 @@ settings = {
 
     # Choose whether to start a Population of Players with randomized Genomes or load a previous save
     # When choosing to load they will be attempted to be loaded from population_settings['save_folder']
-    'creation_type': 'load', # Options are ['new', 'load']
+    'creation_type': 'new', # Options are ['new', 'load']
     # Choose whether to load the settings from the save or use the ones present in this file (if applicable)
     # Only the player_args, progress_settings and playback_settings will be replaced
     'load_all_settings': True,
