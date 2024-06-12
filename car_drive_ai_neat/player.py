@@ -46,7 +46,7 @@ class Player(BaseCar, BasePlayer):
     @property
     def drift_angle(self) -> float:
         """Return the angle between the Car's velocity and its orientation."""
-        return self.angle - self.velocity.angle
+        return self.angle - self.velocity.angle if self.velocity.angle else 0
 
     def look(self, track: BaseTrack) -> None:
         """Set the Car's vision.
