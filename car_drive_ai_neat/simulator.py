@@ -38,6 +38,6 @@ def simulate(player: Player) -> Player:
             gates_passed -= 1
         current_gate_index = track.current_gate_index
 
-    #player.fitness = gates_passed * abs(gates_passed) / time
     player.fitness = gates_passed if not math.isclose(player.angle, start_angle, abs_tol=10e-7) else 0.5    # Forces some turning
+    #player.fitness = gates_passed * abs(gates_passed) / time
     return player
