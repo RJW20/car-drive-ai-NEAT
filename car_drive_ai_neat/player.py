@@ -26,14 +26,14 @@ class Player(BaseCar, BasePlayer):
             return 1
         
         # Otherwise we know there is a first point thats not in bounds
-        l = 0
+        l = 0  # noqa: E741
         r = (3 * self.LENGTH - 1) // 4  # step size of 4
         step = 4 * direction
 
         while l < r:
             m = math.floor((l + r ) / 2)
             if track.check_in_bounds([origin + m * step]):
-                l = m + 1
+                l = m + 1  # noqa: E741
             else:
                 r = m
 

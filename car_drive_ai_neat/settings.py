@@ -91,7 +91,7 @@ progress_settings = {
 playback_settings = {
 
     # Folder to save the top performing Genomes of each generation to
-    'save_folder': None,  # Default = 'playback'
+    'save_folder': 'playback g',  # Default = 'playback'
     # The number of Genomes from each Species to save (set to -1 for all)
     'number': 1,   # Default = 1
 
@@ -124,6 +124,6 @@ settings = {
 # Any constants/variables needed for simulating the Players should be here for easy adjustments
 simulation_settings = {
 
-    'track_name': '18x10_2',
+    'track_name': '18x10g',
 
 }

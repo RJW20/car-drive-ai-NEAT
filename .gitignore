@@ -1,4 +1,6 @@
 tracks/
+latest/
+playback*/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
