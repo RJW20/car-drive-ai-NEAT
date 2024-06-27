@@ -38,6 +38,25 @@ class Player(BaseCar, BasePlayer):
                 r = m
 
         return l * 4 / (3 * self.LENGTH)
+    
+    @property
+    def lidar_rays(self) -> list[Vector]:
+        """Return the list of Vectors pointing in all the directions we are searching in.
+        
+        Returns the directions in the [f, fl, fr, fll, frr, l, r, lb, rb, b]"""
+
+        return [
+            Vector.unit_from_angle(self.angle),
+            Vector.unit_from_angle(self.angle - math.pi/6),
+            Vector.unit_from_angle(self.angle + math.pi/6),
+            Vector.unit_from_angle(self.angle - math.pi/3),
+            Vector.unit_from_angle(self.angle + math.pi/3),
+            Vector.unit_from_angle(self.angle - math.pi/2),
+            Vector.unit_from_angle(self.angle + math.pi/2),
+            Vector.unit_from_angle(self.angle - 3 * math.pi/4),
+            Vector.unit_from_angle(self.angle + 3 * math.pi/4),
+            Vector.unit_from_angle(self.angle + math.pi),
+        ]
             
     @cached_property
     def MAX_SPEED(self) -> float:
@@ -66,18 +85,21 @@ class Player(BaseCar, BasePlayer):
         back_left = back - half_width
         back_right = back + half_width
 
-        # Look by using sonar from different points on the Car
+        # Get the directions to look in
+        lidar_rays = self.lidar_rays
+
+        # Look by using lidar from different points on the Car
         self.vision = [
-            self.look_in_direction(Vector.unit_from_angle(self.angle), front, track),
-            self.look_in_direction(Vector.unit_from_angle(self.angle - math.pi/6), front_left, track),
-            self.look_in_direction(Vector.unit_from_angle(self.angle + math.pi/6), front_right, track),
-            self.look_in_direction(Vector.unit_from_angle(self.angle - math.pi/3), front_left, track),
-            self.look_in_direction(Vector.unit_from_angle(self.angle + math.pi/3), front_right, track),
-            self.look_in_direction(Vector.unit_from_angle(self.angle - math.pi/2), front_left, track),
-            self.look_in_direction(Vector.unit_from_angle(self.angle + math.pi/2), front_right, track),
-            self.look_in_direction(Vector.unit_from_angle(self.angle - 3 * math.pi/4), back_left, track),
-            self.look_in_direction(Vector.unit_from_angle(self.angle + 3 * math.pi/4), back_right, track),
-            self.look_in_direction(Vector.unit_from_angle(self.angle + math.pi), back, track)
+            self.look_in_direction(lidar_rays[0], front, track),
+            self.look_in_direction(lidar_rays[1], front_left, track),
+            self.look_in_direction(lidar_rays[2], front_right, track),
+            self.look_in_direction(lidar_rays[3], front_left, track),
+            self.look_in_direction(lidar_rays[4], front_right, track),
+            self.look_in_direction(lidar_rays[5], front_left, track),
+            self.look_in_direction(lidar_rays[6], front_right, track),
+            self.look_in_direction(lidar_rays[7], back_left, track),
+            self.look_in_direction(lidar_rays[8], back_right, track),
+            self.look_in_direction(lidar_rays[9], back, track)
         ]
 
         # Include some of the Car's attributes
