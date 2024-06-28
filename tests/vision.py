@@ -67,8 +67,8 @@ class Vision(Game):
         for i, start in enumerate(starts):
             max_sight = start + self.car.LENGTH * 3 * lidar_rays[i]
             lidar = start + self.car.LENGTH * 3 * self.car.vision[i] * lidar_rays[i]
-            pygame.draw.line(self.screen, 'red', (start.x, start.y), (max_sight.x, max_sight.y), width=3)
-            pygame.draw.line(self.screen, 'blue', (start.x, start.y), (lidar.x, lidar.y), width=3)
+            pygame.draw.line(self.screen, 'black', (start.x, start.y), (max_sight.x, max_sight.y), width=3)
+            pygame.draw.circle(self.screen, 'white', (lidar.x, lidar.y), radius=6)
 
         # Show the changes
         pygame.display.flip()
