@@ -10,8 +10,9 @@ def simulate(player: Player) -> Player:
     well it performs.
     
     The track save to use is chosen by simulation_settings['track_name']
-    Assigns a fitness that is a ratio of the number of gates cleared and the time 
-    taken to clear them.
+    Assigns a fitness that is either the number of Track gates passed through
+    forwards or a ratio of the square of the number of gates cleared and the
+    time taken to clear them.
     """
 
     track = BaseTrack.load(simulation_settings['track_name'])
@@ -39,5 +40,5 @@ def simulate(player: Player) -> Player:
         current_gate_index = track.current_gate_index
 
     player.fitness = gates_passed if not math.isclose(player.angle, start_angle, abs_tol=10e-7) else 0.5    # Forces some turning
-    #player.fitness = gates_passed * abs(gates_passed) / time
+    #player.fitness = gates_passed * abs(gates_passed) / (time / 50)
     return player
